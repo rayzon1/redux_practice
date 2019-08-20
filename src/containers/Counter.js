@@ -3,7 +3,7 @@ import CounterButtons from '../components/CounterButtons';
 import { useSelector } from 'react-redux';
 
 export default function Counter() {
-    const score = useSelector(state => state.map(state => state.score ))
+    const score = useSelector(state => state.counter.map(state => state.score ))
 
     return (
         <div>

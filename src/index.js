@@ -4,11 +4,16 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import CounterReducer from './reducers/CounterReducer';
+import ReviewsReducer from './reducers/ReviewsReducer';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+const rootReducer = combineReducers({counter: CounterReducer, reviews: ReviewsReducer})
 
 const store = createStore(
-    CounterReducer
+    rootReducer,
+    composeWithDevTools()
 );
 
 ReactDOM.render(

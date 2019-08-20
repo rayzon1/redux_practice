@@ -1,28 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
+import * as ReviewActions from '../actions/ReviewActions';
+import { useDispatch } from 'react-redux';
 
-export default function ReviewList() {
+export default function ReviewList(props) {
+    const [onEdit, setOnEdit] = useState(false);
+    const { reviews } = props;
+    const dispatch = useDispatch();
+
+    const toggleEdit = (bool, index) => {
+        
+    }
+    
+    const reviewTableSection = reviews.map((data, index) => {
+        return (
+            <tr>
+                {onEdit === true && index === 0 ? <input type="text"/> : <td>{data.movie}</td>} 
+                <td>{data.username}</td>
+                <td>{data.review}</td>
+                <button onClick={() => setOnEdit(true)}>Edit</button>
+                <button onClick={() => dispatch(ReviewActions.deleteReview(index))}>Delete</button>
+            </tr>
+        )
+    });
 
     return (
         <>
-            <th>Review List</th>
             <table>
                 <tbody>
                     <tr>
-                        <td>This is my body.</td>
-                        <button>Edit</button>
-                        <button>Delete</button>
+                        <th>Movie</th>
+                        <th>Username</th>
+                        <th>Review</th>
                     </tr>
-                    
-                    <tr>
-                        <td>This is my body.</td> 
-                        <button>Edit</button>
-                        <button>Delete</button>
-                    </tr>
-                    <tr>
-                        <td>This is my body.</td>
-                        <button>Edit</button>
-                        <button>Delete</button>
-                    </tr>
+                    {reviewTableSection}
                 </tbody>
             </table>
         </>
