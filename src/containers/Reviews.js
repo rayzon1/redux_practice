@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 export default function Reviews() {
     const reviews = useSelector(state => state.reviews.reviews)
-    
+    console.log(reviews);
 
     return (
         <>

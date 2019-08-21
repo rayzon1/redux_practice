@@ -21,7 +21,6 @@ const initialState = {
 }
 
 export const fillReview = (movie, username, review) => {
-    
     return {
        movie,
        username,
@@ -40,16 +39,16 @@ export default function ReviewsReducer(state=initialState, action) {
             }
                 
         case ReviewActionTypes.EDIT_REVIEW:
-            return state.reviews.map( (review, index) => {
-                if(index === action.index) {
-                    return [
-                        ...review,
-                        fillReview(action.movie, action.username, action.review)
-                    ]
-                }
-                return review;
-            })
 
+            return {
+                reviews: state.reviews.map((data, index) => {
+                    if (index === action.index) {
+                        return fillReview(action.movie, action.username, action.review);
+                    } 
+                    return data
+                })
+            }
+            
         case ReviewActionTypes.DELETE_REVIEW:
             return {
                 reviews: [
